@@ -31,8 +31,12 @@
   .bar-label{color:var(--muted);font-size:12px;margin-top:6px}
   .crumb{color:var(--muted);font-size:12.5px;margin:6px 0 2px}
   h2.lt{font-size:27px;margin:4px 0 18px;line-height:1.25}
-  #view>p{max-width:78ch}
-  .block{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:0 0 16px;max-width:78ch}
+  #view>p{max-width:80ch}
+  .masonry{column-gap:16px}
+  .masonry>*{break-inside:avoid}
+  .m-lesson{column-width:470px}
+  .m-card{column-width:390px}
+  .block{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:0 0 16px}
   .block h3{margin:0 0 8px;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--accent)}
   .block.apply h3{color:#5ad2a0}.block.scn h3{color:#e0b34c}.block.ex h3{color:var(--accent2)}.block.ref h3{color:#63b3ff}
   .block ul{margin:6px 0 0;padding-left:20px}.block li{margin:6px 0}
@@ -145,7 +149,7 @@
   .book-card.expanded .bchev{transform:rotate(90deg)}
   .bhinfo{flex:1 1 auto;min-width:0}
   .bcount{flex:0 0 auto;font-size:11px;color:#9fc0ff;border:1px solid var(--line);border-radius:10px;padding:2px 9px}
-  .bbody{display:none;padding:0 22px 18px}
+  .bbody{display:none;padding:0 22px 18px;max-width:90ch}
   .bbody.show{display:block}
   .book-card h3{margin:0;font-size:18px}
   .book-card .co{color:var(--muted);font-size:13px;margin:2px 0 0}
@@ -170,7 +174,7 @@
 <body>
 <aside>
   <h1>PM &amp; AI Learning Hub</h1>
-  <p class="sub">23 lessons · curated AI PM curriculum · 14/07/2026, 15:54:45</p>
+  <p class="sub">23 lessons · curated AI PM curriculum · 14/07/2026, 16:03:25</p>
   <input class="search" id="search" placeholder="Search lessons…">
   <div class="navtabs">
     <button id="tabLearn" class="active" onclick="setTab('learn')">Lessons</button>
@@ -297,6 +301,7 @@ function rolesView(){
     h+='</div>';
     h+='<h3 class="roles-sub">Roles, unpacked</h3>';
   }
+  h+='<div class="masonry m-card">';
   ROLES.forEach(r=>{
     h+='<div class="role-card"><div class="rtop"><div>'+
        '<h3>'+r.title+'</h3><div class="co">'+r.company+' · '+r.location+'</div></div>'+
@@ -314,6 +319,7 @@ function rolesView(){
     }
     h+='</div>';
   });
+  h+='</div>';
   document.getElementById('view').innerHTML=h;
   window.scrollTo(0,0);
 }
@@ -336,10 +342,12 @@ function progressView(){
   else { h+='<div class="prog-next">🎉 Every lesson complete — revisit the Eval Lab and ship a Build Log artifact.</div>'; }
   h+='</div></div>';
   h+='<h3 class="sec-h">By track</h3>';
+  h+='<div class="masonry m-card">';
   rows.forEach(function(r){
     h+='<div class="trackrow" onclick="showLesson(\''+r.first+'\')"><div class="tr-top"><span class="tr-name">'+r.icon+' '+r.name+'</span><span class="tr-c">'+r.dc+'/'+r.total+'</span></div>'+
        '<div class="skbar"><span class="skfill" style="width:'+r.p+'%"></span></div></div>';
   });
+  h+='</div>';
   if(weak && weak.p<100){ h+='<div class="weakbox"><b>Focus area:</b> '+weak.icon+' '+weak.name+' is your least-complete track ('+weak.p+'%). '+(weak.p===0?'A strong place to start.':'Finish it to round out your foundation.')+'</div>'; }
   document.getElementById('view').innerHTML=h;
   window.scrollTo(0,0);
@@ -348,6 +356,7 @@ function progressView(){
 function buildLogView(){
   var h='<div class="crumb">Portfolio</div><h2 class="lt">🛠️ Build Log — Proof You Can Build</h2>'+
     '<p style="color:var(--muted)">The market wants evidence, not just PRDs. These are starter artifacts that turn what you learn here into things you can link on a CV and talk through in interviews. Each shows the skills it proves, the roles it helps land, and the lessons behind it. Ship one, then fill in the repo/demo link and what you learned.</p>';
+  h+='<div class="masonry m-card">';
   BUILDLOG.forEach(function(b){
     var st=b.status; var lbl = st==='shipped'?'Shipped':(st==='building'?'Building':'Idea');
     h+='<div class="build-card"><div class="bl-top"><h3>'+b.title+'</h3><span class="bl-status '+st+'">'+lbl+'</span></div>';
@@ -363,6 +372,7 @@ function buildLogView(){
     if(b.learned) h+='<div class="bl-learned"><b>What I learned:</b> '+b.learned+'</div>';
     h+='</div>';
   });
+  h+='</div>';
   document.getElementById('view').innerHTML=h;
   window.scrollTo(0,0);
 }
@@ -372,10 +382,12 @@ function evalLabView(){
   var h='<div class="crumb">Hands-on lab</div><h2 class="lt">🧪 Eval Lab — Build a Real Eval Harness</h2>';
   h+='<p style="color:var(--muted)">'+e.intro+'</p>';
   h+='<div class="lab-task"><b>Running example:</b> '+e.task+'</div>';
+  h+='<div class="masonry m-card">';
   (e.steps||[]).forEach(function(s){
     h+='<div class="lab-step"><div class="ls-n">'+s.n+'</div><div class="ls-body"><h4>'+s.title+'</h4><p>'+s.body+'</p>'+
        '<div class="lchips">'+(s.lessons||[]).map(lchip).join('')+'</div></div></div>';
   });
+  h+='</div>';
   h+='<h3 class="sec-h">Starter skeleton</h3><pre class="code">'+esc(e.starter)+'</pre>';
   h+='<h3 class="sec-h">Common pitfalls</h3><ul class="pitfalls">'+(e.pitfalls||[]).map(function(p){return '<li>'+p+'</li>';}).join('')+'</ul>';
   document.getElementById('view').innerHTML=h;
@@ -386,12 +398,12 @@ function interviewView(){
   var h='<div class="crumb">Interview prep</div><h2 class="lt">🎤 Interview Question Bank</h2>'+
     '<p style="color:var(--muted)">The questions you are near-certain to get, grouped by theme. Each has a crib — how to STRUCTURE a strong answer, not a script to memorise — and links to the lesson that arms it. Rehearse out loud.</p>';
   INTERVIEW.forEach(function(t){
-    h+='<div class="qgroup"><h3>'+t.icon+' '+t.theme+'</h3>';
+    h+='<div class="qgroup"><h3>'+t.icon+' '+t.theme+'</h3><div class="masonry m-card">';
     (t.questions||[]).forEach(function(qq){
       h+='<div class="qcard"><div class="q">'+qq.q+'</div><div class="crib"><b>How to answer:</b> '+qq.crib+'</div>'+
          '<div class="lchips">'+(qq.lessons||[]).map(lchip).join('')+'</div></div>';
     });
-    h+='</div>';
+    h+='</div></div>';
   });
   document.getElementById('view').innerHTML=h;
   window.scrollTo(0,0);
@@ -400,6 +412,7 @@ function interviewView(){
 function teardownsView(){
   var h='<div class="crumb">Product teardowns</div><h2 class="lt">🔍 AI Product Teardowns</h2>'+
     '<p style="color:var(--muted)">Real shipped AI products dissected through the PM lens — the AI job, how it likely works, the key product decisions, how you would measure it, and the interview angle. Great for sharpening product sense and stocking talking points.</p>';
+  h+='<div class="masonry m-card">';
   TEARDOWNS.forEach(function(t){
     h+='<div class="td-card"><div class="bl-top"><h3>'+t.product+'</h3><span class="rtag">'+t.tag+'</span></div>';
     h+='<div class="td-sec"><span class="td-lbl">The AI job</span><p>'+t.job+'</p></div>';
@@ -409,6 +422,7 @@ function teardownsView(){
     h+='<div class="td-sec td-interview"><span class="td-lbl">Interview angle</span><p>'+t.interview+'</p></div>';
     h+='<div class="lchips">'+(t.lessons||[]).map(lchip).join('')+'</div></div>';
   });
+  h+='</div>';
   document.getElementById('view').innerHTML=h;
   window.scrollTo(0,0);
 }
@@ -467,6 +481,7 @@ function showLesson(id){
   const prev = idx>0?flat[idx-1]:null, next = idx<flat.length-1?flat[idx+1]:null;
   document.getElementById('view').innerHTML =
     '<div class="crumb">'+m.icon+' '+m.name+'</div><h2 class="lt">'+l.title+'</h2>'+
+    '<div class="masonry m-lesson">'+
     '<div class="block"><h3>What it is</h3><div>'+l.what+'</div></div>'+
     '<div class="block"><h3>How to understand it</h3><div>'+l.understand+'</div></div>'+
     '<div class="block apply"><h3>How to apply it as a PM</h3><ul>'+applied+'</ul></div>'+
@@ -474,6 +489,7 @@ function showLesson(id){
     '<div class="block ex"><h3>Practice exercise</h3><div>'+l.exercise+'</div></div>'+
     (refs?'<div class="block ref"><h3>Go deeper — references</h3><div class="related">'+refs+'</div></div>':'')+
     (rel?'<div class="block"><h3>Related reading</h3><div class="related">'+rel+'</div></div>':'')+
+    '</div>'+
     '<label class="mark"><input type="checkbox" id="markDone" '+(done[l.id]?'checked':'')+'> Mark this lesson complete</label>'+
     '<div class="navrow">'+
       (prev?'<button class="btn" onclick="showLesson(\''+prev.l.id+'\')">← '+prev.l.title+'</button>':'<button class="btn" onclick="homeView()">← Home</button>')+
