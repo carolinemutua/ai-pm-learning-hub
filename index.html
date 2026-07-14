@@ -219,7 +219,7 @@
 <body>
 <aside>
   <h1>PM &amp; AI Learning Hub</h1>
-  <p class="sub">23 lessons · curated AI PM curriculum · 14/07/2026, 17:59:04</p>
+  <p class="sub">23 lessons · curated AI PM curriculum · 14/07/2026, 18:01:54</p>
   <input class="search" id="search" placeholder="Search lessons…">
   <div class="navtabs">
     <button id="tabLearn" class="active" onclick="setTab('learn')">Lessons</button>
@@ -303,7 +303,7 @@ function setTab(t){ tab=t; syncTabs();
   else homeView(); }
 
 function homeView(){
-  let h='<div class="crumb">Your learning hub</div><h2 class="lt">Your PM &amp; AI Learning Hub</h2>'+
+  let h='<div class="crumb">Welcome back, AI PM</div><h2 class="lt">Your PM &amp; AI Learning Hub</h2>'+
     '<p style="color:var(--muted)">Each lesson unpacks a key AI PM concept: <b>what it is</b>, <b>how to understand it</b>, <b>how to apply it as a PM</b>, real <b>consumer-product scenarios</b>, a <b>practice exercise</b>, and <b>references</b> to go deeper. Pick a track, open the <a href="#" onclick="setTab(\'roles\');return false;">🎯 Skills</a> tab to see what the AI PM market demands, the <a href="#" onclick="setTab(\'books\');return false;">📖 Books</a> tab for chapter-by-chapter study guides, or the <a href="#" onclick="setTab(\'refs\');return false;">References</a> tab for the full reading list.</p>'+
     '<div class="home-cards">';
   MODULES.forEach(m=>{ h+='<div class="home-card" onclick="showLesson(\''+m.lessons[0].id+'\')"><div class="ic">'+m.icon+'</div><h4>'+m.name+'</h4><p>'+m.blurb+'</p></div>'; });
