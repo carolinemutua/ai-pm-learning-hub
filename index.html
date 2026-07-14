@@ -38,9 +38,10 @@
   .block ul{margin:6px 0 0;padding-left:20px}.block li{margin:6px 0}
   .scn-item{border-left:3px solid #e0b34c55;padding:4px 0 4px 12px;margin:12px 0}
   .scn-item b{color:#f0c96b}
-  .reflist{list-style:none;padding:0;margin:0}
-  .reflist li{padding:9px 0;border-bottom:1px dashed var(--line)}.reflist li:last-child{border-bottom:0}
-  .reflist .ra{color:#9fc0ff;font-weight:600}.reflist .rn{color:var(--muted);font-size:12.5px;display:block;margin-top:2px}
+  .reflist{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+  .reflist li{padding:12px 14px;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+  .reflist li:hover{border-color:var(--accent)}
+  .reflist .ra{color:#9fc0ff;font-weight:600}.reflist .rn{color:var(--muted);font-size:12px;display:block;margin-top:4px;line-height:1.45}
   .badge{font-size:10.5px;padding:1px 6px;border-radius:10px;border:1px solid var(--line);color:var(--muted);margin-left:6px}
   .badge.free{color:#5ad2a0;border-color:#2c6b4f}.badge.paid{color:#e0b34c;border-color:#6b5a2c}
   .related{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
@@ -56,8 +57,8 @@
   .home-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;cursor:pointer}
   .home-card:hover{border-color:var(--accent)}
   .home-card .ic{font-size:26px}.home-card h4{margin:8px 0 4px;font-size:15px}.home-card p{color:var(--muted);font-size:12.5px;margin:0}
-  .ref-group{margin-bottom:22px}
-  .ref-group h3{font-size:15px;margin:0 0 8px;color:#fff}
+  .ref-group{margin-bottom:26px}
+  .ref-group h3{font-size:15px;margin:0 0 12px;color:#fff;padding-bottom:6px;border-bottom:1px solid var(--line)}
   .skills-panel{background:linear-gradient(180deg,#121a30,#0e1526);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:0 0 24px}
   .sk-h h3{margin:0 0 4px;font-size:19px}
   .sk-h .sk-sub{margin:0 0 14px;color:var(--muted);font-size:12.5px;line-height:1.5}
@@ -169,7 +170,7 @@
 <body>
 <aside>
   <h1>PM &amp; AI Learning Hub</h1>
-  <p class="sub">23 lessons · curated AI PM curriculum · 14/07/2026, 15:23:26</p>
+  <p class="sub">23 lessons · curated AI PM curriculum · 14/07/2026, 15:51:02</p>
   <input class="search" id="search" placeholder="Search lessons…">
   <div class="navtabs">
     <button id="tabLearn" class="active" onclick="setTab('learn')">Lessons</button>
