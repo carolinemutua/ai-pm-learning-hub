@@ -2,7 +2,9 @@
 
 A self-contained, interactive learning platform for transitioning into **AI Product Management**.
 
-Open `index.html` in any browser — no build step, no dependencies.
+**View it live:** https://carolinemutua.github.io/ai-pm-learning-hub/
+
+Or open `index.html` in any browser. No build step, no dependencies.
 
 ## What's inside
 - **Lessons** — 23 lessons across 6 tracks (AI PM, PM foundations, agentic AI & LLM literacy, leadership, career, security & cloud)
