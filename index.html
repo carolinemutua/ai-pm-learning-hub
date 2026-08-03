@@ -228,7 +228,7 @@
 <body>
 <aside>
   <h1>PM &amp; AI Learning Hub</h1>
-  <p class="sub">24 lessons · curated AI PM curriculum · 14/07/2026, 19:46:55</p>
+  <p class="sub" id="subline">curated AI PM curriculum</p>
   <input class="search" id="search" placeholder="Search lessons…">
   <div class="navtabs">
     <button id="tabLearn" class="active" onclick="setTab('learn')">Lessons</button>
@@ -259,6 +259,15 @@ const flat = [];
 MODULES.forEach(m => m.lessons.forEach(l => flat.push({m, l})));
 const LBYID = {};
 flat.forEach(x => { LBYID[x.l.id] = { title: x.l.title, icon: x.m.icon }; });
+
+(function setSubline(){
+  const el = document.getElementById('subline');
+  if (!el) return;
+  let when = '';
+  const d = new Date(document.lastModified);
+  if (!isNaN(d.getTime())) when = ' · updated ' + d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  el.textContent = flat.length + ' lessons · curated AI PM curriculum' + when;
+})();
 
 function save(){ localStorage.setItem(KEY, JSON.stringify(done)); }
 function pct(){ const n = Object.values(done).filter(Boolean).length; return Math.round(n/flat.length*100); }
